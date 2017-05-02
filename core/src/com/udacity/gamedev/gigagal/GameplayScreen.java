@@ -64,7 +64,6 @@ public class GameplayScreen implements Screen {
 
         batch.end();
 
-
     }
 
 

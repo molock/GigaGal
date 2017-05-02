@@ -49,11 +49,19 @@ public class Assets implements Disposable, AssetErrorListener {
         public final TextureAtlas.AtlasRegion standingRightSprite;
         public final TextureAtlas.AtlasRegion standingLeftSprite;
 
+        // Add AtlasRegions for jumping-left and jumping-right
+        public final TextureAtlas.AtlasRegion jumpingRightSprite;
+        public final TextureAtlas.AtlasRegion jumpingLeftSprite;
+
 
         public GigaGalAssets(TextureAtlas atlas) {
             // Use atlas.findRegion() to initialize the standing right AtlasRegion
             standingRightSprite = atlas.findRegion(Constants.STANDING_RIGHT);
             standingLeftSprite = atlas.findRegion(Constants.STANDING_LEFT);
+
+            // Find jumping-left and jumping-right
+            jumpingRightSprite = atlas.findRegion(Constants.JUMPING_RIGHT);
+            jumpingLeftSprite = atlas.findRegion(Constants.JUMPING_LEFT);
         }
     }
 

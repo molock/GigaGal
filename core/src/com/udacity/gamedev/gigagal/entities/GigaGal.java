@@ -1,7 +1,6 @@
 package com.udacity.gamedev.gigagal.entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -53,16 +52,16 @@ public class GigaGal {
     }
 
     public void update(float delta) {
-        // TODO: Accelerate GigaGal down
+        // Accelerate GigaGal down
         // Multiple delta by the acceleration due to gravity and subtract it from GG's vertical velocity
 
         velocity.y -= Constants.GRAVITY_ACC * delta;
 
-        // TODO: Apply GigaGal's velocity to her position
+        // Apply GigaGal's velocity to her position
         // Vector2.mulAdd() is very convenient.
         position.mulAdd(velocity, delta);
 
-        // TODO: If GigaGal isn't JUMPING, make her now FALLING
+        // If GigaGal isn't JUMPING, make her now FALLING
         if(jumpState != JumpState.JUMPING) {
             jumpState = JumpState.FALLING;
         }
@@ -170,6 +169,14 @@ public class GigaGal {
         // Set region to the correct sprite for the current facing direction
         if(facing == Facing.LEFT) {
             region = Assets.instance.gigaGalAssets.standingLeftSprite;
+            if(jumpState != JumpState.GROUNDED) {
+                region = Assets.instance.gigaGalAssets.jumpingLeftSprite;
+            }
+        } else if (facing == Facing.RIGHT) {
+            region = Assets.instance.gigaGalAssets.standingRightSprite;
+            if(jumpState != JumpState.GROUNDED) {
+                region = Assets.instance.gigaGalAssets.jumpingRightSprite;
+            }
         }
 
 
