@@ -23,31 +23,23 @@ public class GigaGal {
 
     // Add a position
     public Vector2 position;
-
-    // Add a Facing member variable (defined below)
-    Facing facing;
-
-    // Add a Vector2 for GigaGal's velocity
     Vector2 velocity;
-
-    // Add a JumpState
-    JumpState jumpState;
-
-    // Add a long for jumpStartTime
     long jumpStartTime;
 
+    Facing facing;
+    JumpState jumpState;
+
+    // Add WalkState member
+    WalkState walkState;
 
     public GigaGal() {
         // Initialize GigaGal's position with height = GIGAGAL_EYE_HEIGHT
         position = new Vector2(20, GIGAGAL_EYE_HEIGHT);
-        // Initialize facing, probably with Facing.RIGHT
-        facing = Facing.RIGHT;
-
-        // Initialize velocity
         velocity = new Vector2(0, 0);
 
-        // Initialize JumpState (probably to FALLING)
+        facing = Facing.RIGHT;
         jumpState = JumpState.FALLING;
+        walkState = WalkState.STANDING;
 
     }
 
@@ -93,31 +85,27 @@ public class GigaGal {
             endJump();
         }
 
-
         if(Gdx.input.isKeyPressed(Keys.LEFT)) {
             moveLeft(delta);
-        }
-
-        if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        } else if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
             moveRight(delta);
+        } else {
+            walkState = WalkState.STANDING;
         }
 
     }
 
     private void moveLeft(float delta) {
-        // Update facing direction
+        walkState = WalkState.WALKING;
         facing = Facing.LEFT;
-
-        // Move GigaGal left by delta * movement speed
         position.x -= delta * Constants.GIGAGAL_MOVE_SPEED;
+
 
     }
 
     private void moveRight(float delta) {
-        // Update facing direction
+        walkState = WalkState.WALKING;
         facing = Facing.RIGHT;
-
-        // Same for moving GigaGal right
         position.x += delta * Constants.GIGAGAL_MOVE_SPEED;
     }
 
@@ -131,7 +119,6 @@ public class GigaGal {
 
         // Call continueJump()
         continueJump();
-
     }
 
     private void continueJump() {
@@ -158,25 +145,26 @@ public class GigaGal {
         if(jumpState == JumpState.JUMPING) {
             jumpState = JumpState.FALLING;
         }
-
     }
 
     public void render(SpriteBatch batch) {
         // Draw GigaGal's standing-right sprite at position - GIGAGAL_EYE_POSITION
-
-        TextureRegion region = Assets.instance.gigaGalAssets.standingRightSprite;
+        TextureRegion region = Assets.instance.gigaGalAssets.standingRight;
 
         // Set region to the correct sprite for the current facing direction
-        if(facing == Facing.LEFT) {
-            region = Assets.instance.gigaGalAssets.standingLeftSprite;
-            if(jumpState != JumpState.GROUNDED) {
-                region = Assets.instance.gigaGalAssets.jumpingLeftSprite;
-            }
-        } else if (facing == Facing.RIGHT) {
-            region = Assets.instance.gigaGalAssets.standingRightSprite;
-            if(jumpState != JumpState.GROUNDED) {
-                region = Assets.instance.gigaGalAssets.jumpingRightSprite;
-            }
+        if (facing == Facing.RIGHT && jumpState != JumpState.GROUNDED) {
+            region = Assets.instance.gigaGalAssets.jumpingRight;
+        } else if (facing == Facing.RIGHT && walkState == WalkState.STANDING) {
+            region = Assets.instance.gigaGalAssets.standingRight;
+        } else if (facing == Facing.RIGHT && walkState == WalkState.WALKING) {
+            region = Assets.instance.gigaGalAssets.walkingRight;
+
+        } else if (facing == Facing.LEFT && jumpState != JumpState.GROUNDED) {
+            region = Assets.instance.gigaGalAssets.jumpingLeft;
+        } else if (facing == Facing.LEFT && walkState == walkState.STANDING) {
+            region = Assets.instance.gigaGalAssets.standingLeft;
+        } else if (facing == Facing.LEFT && walkState == walkState.WALKING) {
+            region = Assets.instance.gigaGalAssets.walkingLeft;
         }
 
 
@@ -205,12 +193,16 @@ public class GigaGal {
         GROUNDED
     }
 
-
     // DO THIS FIRST!!! Create an enum called Facing, with LEFT and RIGHT members
     enum Facing{
         LEFT,
         RIGHT
     }
 
+    // Do this first!!! Add WalkState enum containing STANDING and WALKING
+    enum WalkState{
+        STANDING,
+        WALKING
+    }
 
 }

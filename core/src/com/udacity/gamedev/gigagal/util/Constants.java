@@ -25,20 +25,17 @@ public class Constants {
 
     public static final String STANDING_RIGHT = "standing-right";
     public static final String STANDING_LEFT = "standing-left";
-
-    // TODO: Add constants for the jumping-right and jumping-left sprites
     public static final String JUMPING_RIGHT = "jumping-right";
     public static final String JUMPING_LEFT = "jumping-left";
+
+    public static final String WALK_2_RIGHT = "walk-2-right";
+    public static final String WALK_2_LEFT = "walk-2-left";
 
     // Define a Vector2 Constant for GigaGal's eye position within her sprites (16, 24)
     public static final Vector2 GIGAGAL_EYE_POSITION = new Vector2(16, 24);
 
-    // Define a float constant for the height of GigaGal's eye above her feet (16)
     public static final float GIGAGAL_EYE_HEIGHT = 16f;
-
     public static final float GIGAGAL_MOVE_SPEED = 40;
-
-    // Add constant for GigaGal's jump speed
     public static final float GIGAGAL_JUMP_SPEED = 250;
 
     // Add constant for GigaGal's max jump duration

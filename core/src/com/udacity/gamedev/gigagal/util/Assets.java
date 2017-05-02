@@ -45,23 +45,27 @@ public class Assets implements Disposable, AssetErrorListener {
     }
 
     public class GigaGalAssets {
-        // Add a AtlasRegion to hold the standing-right sprite
-        public final TextureAtlas.AtlasRegion standingRightSprite;
-        public final TextureAtlas.AtlasRegion standingLeftSprite;
+        public final TextureAtlas.AtlasRegion standingRight;
+        public final TextureAtlas.AtlasRegion standingLeft;
 
-        // Add AtlasRegions for jumping-left and jumping-right
-        public final TextureAtlas.AtlasRegion jumpingRightSprite;
-        public final TextureAtlas.AtlasRegion jumpingLeftSprite;
+        public final TextureAtlas.AtlasRegion jumpingRight;
+        public final TextureAtlas.AtlasRegion jumpingLeft;
+
+        public final TextureAtlas.AtlasRegion walkingRight;
+        public final TextureAtlas.AtlasRegion walkingLeft;
+
 
 
         public GigaGalAssets(TextureAtlas atlas) {
-            // Use atlas.findRegion() to initialize the standing right AtlasRegion
-            standingRightSprite = atlas.findRegion(Constants.STANDING_RIGHT);
-            standingLeftSprite = atlas.findRegion(Constants.STANDING_LEFT);
+            standingRight = atlas.findRegion(Constants.STANDING_RIGHT);
+            standingLeft = atlas.findRegion(Constants.STANDING_LEFT);
 
-            // Find jumping-left and jumping-right
-            jumpingRightSprite = atlas.findRegion(Constants.JUMPING_RIGHT);
-            jumpingLeftSprite = atlas.findRegion(Constants.JUMPING_LEFT);
+            jumpingRight = atlas.findRegion(Constants.JUMPING_RIGHT);
+            jumpingLeft = atlas.findRegion(Constants.JUMPING_LEFT);
+
+            walkingRight = atlas.findRegion(Constants.WALK_2_RIGHT);
+            walkingLeft = atlas.findRegion(Constants.WALK_2_LEFT);
+
         }
     }
 
