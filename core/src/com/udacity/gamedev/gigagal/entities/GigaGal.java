@@ -23,10 +23,15 @@ public class GigaGal {
     // Add a position
     public Vector2 position;
 
+    // Add a Facing member variable (defined below)
+    Facing facing;
+
 
     public GigaGal() {
         // Initialize GigaGal's position with height = GIGAGAL_EYE_HEIGHT
         position = new Vector2(20, GIGAGAL_EYE_HEIGHT);
+        // Initialize facing, probably with Facing.RIGHT
+        facing = Facing.RIGHT;
 
     }
 
@@ -46,20 +51,33 @@ public class GigaGal {
     }
 
     private void moveLeft(float delta) {
-        // TODO: Move GigaGal left by delta * movement speed
+        // Update facing direction
+        facing = Facing.LEFT;
+
+        // Move GigaGal left by delta * movement speed
         position.x -= delta * Constants.GIGAGAL_MOVE_SPEED;
 
     }
 
     private void moveRight(float delta) {
-        // TODO: Same for moving GigaGal right
+        // Update facing direction
+        facing = Facing.RIGHT;
+
+        // Same for moving GigaGal right
         position.x += delta * Constants.GIGAGAL_MOVE_SPEED;
     }
 
     public void render(SpriteBatch batch) {
         // Draw GigaGal's standing-right sprite at position - GIGAGAL_EYE_POSITION
 
+
         TextureRegion region = Assets.instance.gigaGalAssets.standingRightSprite;
+
+        // Set region to the correct sprite for the current facing direction
+        if(facing == Facing.LEFT) {
+            region = Assets.instance.gigaGalAssets.standingLeftSprite;
+        }
+
 
         batch.draw(
                 region.getTexture(),
@@ -79,7 +97,12 @@ public class GigaGal {
         );
 
 
+    }
 
+    // TODO: DO THIS FIRST!!! Create an enum called Facing, with LEFT and RIGHT members
+    public enum Facing{
+        LEFT,
+        RIGHT
     }
 
 

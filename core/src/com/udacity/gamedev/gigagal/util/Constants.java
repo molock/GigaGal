@@ -24,13 +24,15 @@ public class Constants {
     public static final String TEXTURE_ATLAS = "images/gigagal.pack.atlas";
 
     // Add a constant for the name of the standing-right sprite
-    public static final String STANDING_RIGHT_NAME = "standing-right";
+    public static final String STANDING_RIGHT = "standing-right";
+
+    public static final String STANDING_LEFT = "standing-left";
 
     // Define a Vector2 Constant for GigaGal's eye position within her sprites (16, 24)
     public static final Vector2 GIGAGAL_EYE_POSITION = new Vector2(16, 24);
 
     // Define a float constant for the height of GigaGal's eye above her feet (16)
-    public static final float GIGAGAL_EYE_HEIGHT = 16;
+    public static final float GIGAGAL_EYE_HEIGHT = 16f;
 
     public static final float GIGAGAL_MOVE_SPEED = 40;
 
