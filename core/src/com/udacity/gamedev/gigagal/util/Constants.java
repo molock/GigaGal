@@ -36,5 +36,15 @@ public class Constants {
 
     public static final float GIGAGAL_MOVE_SPEED = 40;
 
+    // Add constant for GigaGal's jump speed
+    public static final float GIGAGAL_JUMP_SPEED = 250;
+
+    // Add constant for GigaGal's max jump duration
+    // Meaning how long you can hold the jump key to continue to jump higher. 0.15 seconds works well
+    public static final float GIGAGAL_MAX_JUMP_DURATION = 0.15f;
+
+    // Add constant for acceleration due to gravity
+    // Something like 1000 works well.
+    public static final float GRAVITY_ACC = 1000;
 
 }
