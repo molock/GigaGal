@@ -25,11 +25,10 @@ public class GigaGal {
     public Vector2 position;
     Vector2 velocity;
     long jumpStartTime;
+    long walkStartTime;
 
     Facing facing;
     JumpState jumpState;
-
-    // Add WalkState member
     WalkState walkState;
 
     public GigaGal() {
@@ -96,6 +95,10 @@ public class GigaGal {
     }
 
     private void moveLeft(float delta) {
+        if(jumpState == JumpState.GROUNDED && walkState!= WalkState.WALKING) {
+            walkStartTime = TimeUtils.nanoTime();
+        }
+
         walkState = WalkState.WALKING;
         facing = Facing.LEFT;
         position.x -= delta * Constants.GIGAGAL_MOVE_SPEED;
@@ -104,6 +107,10 @@ public class GigaGal {
     }
 
     private void moveRight(float delta) {
+        if(jumpState == JumpState.GROUNDED && walkState!= WalkState.WALKING) {
+            walkStartTime = TimeUtils.nanoTime();
+        }
+
         walkState = WalkState.WALKING;
         facing = Facing.RIGHT;
         position.x += delta * Constants.GIGAGAL_MOVE_SPEED;
@@ -157,14 +164,20 @@ public class GigaGal {
         } else if (facing == Facing.RIGHT && walkState == WalkState.STANDING) {
             region = Assets.instance.gigaGalAssets.standingRight;
         } else if (facing == Facing.RIGHT && walkState == WalkState.WALKING) {
-            region = Assets.instance.gigaGalAssets.walkingRight;
+            //region = Assets.instance.gigaGalAssets.walkingRight_1;
+            float walkingDuration = MathUtils.nanoToSec * (TimeUtils.nanoTime() - walkStartTime);
+
+            region = Assets.instance.gigaGalAssets.walkRightAnimation.getKeyFrame(walkingDuration);
 
         } else if (facing == Facing.LEFT && jumpState != JumpState.GROUNDED) {
             region = Assets.instance.gigaGalAssets.jumpingLeft;
         } else if (facing == Facing.LEFT && walkState == walkState.STANDING) {
             region = Assets.instance.gigaGalAssets.standingLeft;
         } else if (facing == Facing.LEFT && walkState == walkState.WALKING) {
-            region = Assets.instance.gigaGalAssets.walkingLeft;
+            //region = Assets.instance.gigaGalAssets.walkingLeft_2;
+
+            float walkingDuration = MathUtils.nanoToSec * (TimeUtils.nanoTime() - walkStartTime);
+            region = Assets.instance.gigaGalAssets.walkLeftAnimation.getKeyFrame(walkingDuration);
         }
 
 
