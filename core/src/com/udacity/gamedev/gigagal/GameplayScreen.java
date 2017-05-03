@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.udacity.gamedev.gigagal.util.Assets;
 import com.udacity.gamedev.gigagal.util.Constants;
@@ -21,6 +22,7 @@ public class GameplayScreen implements Screen {
     public static final String TAG = GameplayScreen.class.getName();
 
     SpriteBatch batch;
+    ShapeRenderer renderer;
     ExtendViewport viewport;
     Level level;
 
@@ -33,6 +35,8 @@ public class GameplayScreen implements Screen {
         level = new Level();
 
         batch = new SpriteBatch();
+        renderer = new ShapeRenderer();
+        renderer.setAutoShapeType(true);
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
     }
 
@@ -57,16 +61,14 @@ public class GameplayScreen implements Screen {
 
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
-        batch.begin();
-
+        renderer.setProjectionMatrix(viewport.getCamera().combined);
         // Render the Level
-        level.render(batch);
+        level.render(batch, renderer);
 
-        batch.end();
+        // 在标题中显示fps
+        Gdx.graphics.setTitle(""+Gdx.graphics.getFramesPerSecond());
 
     }
-
-
 
     @Override
     public void pause() {

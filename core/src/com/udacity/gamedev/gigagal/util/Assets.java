@@ -5,6 +5,8 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
@@ -18,11 +20,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String TAG = Assets.class.getName();
 
     public static final Assets instance = new Assets();
-
     public GigaGalAssets gigaGalAssets;
-
     private AssetManager assetManager;
-
     private Assets() {
     }
 
@@ -53,17 +52,8 @@ public class Assets implements Disposable, AssetErrorListener {
         public final TextureAtlas.AtlasRegion jumpingRight;
         public final TextureAtlas.AtlasRegion jumpingLeft;
 
-        public final TextureAtlas.AtlasRegion walkingRight_1;
-        public final TextureAtlas.AtlasRegion walkingLeft_1;
-
-        public final TextureAtlas.AtlasRegion walkingRight_2;
-        public final TextureAtlas.AtlasRegion walkingLeft_2;
-
-        public final TextureAtlas.AtlasRegion walkingRight_3;
-        public final TextureAtlas.AtlasRegion walkingLeft_3;
-
-        public final Animation<TextureAtlas.AtlasRegion> walkRightAnimation;
-        public final Animation<TextureAtlas.AtlasRegion> walkLeftAnimation;
+        public final Animation<AtlasRegion> walkRightAnimation;
+        public final Animation<AtlasRegion> walkLeftAnimation;
 
 
         public GigaGalAssets(TextureAtlas atlas) {
@@ -73,34 +63,25 @@ public class Assets implements Disposable, AssetErrorListener {
             jumpingRight = atlas.findRegion(Constants.JUMPING_RIGHT);
             jumpingLeft = atlas.findRegion(Constants.JUMPING_LEFT);
 
-            walkingRight_1 = atlas.findRegion(Constants.WALK_RIGHT_1);
-            walkingLeft_1 = atlas.findRegion(Constants.WALK_LEFT_1);
+            Array<AtlasRegion> walkRightFrames = new Array<AtlasRegion>();
+            walkRightFrames.add(atlas.findRegion(Constants.WALK_RIGHT_1));
+            walkRightFrames.add(atlas.findRegion(Constants.WALK_RIGHT_2));
+            walkRightFrames.add(atlas.findRegion(Constants.WALK_RIGHT_3));
 
-            walkingRight_2 = atlas.findRegion(Constants.WALK_RIGHT_2);
-            walkingLeft_2 = atlas.findRegion(Constants.WALK_LEFT_2);
-
-            walkingRight_3 = atlas.findRegion(Constants.WALK_RIGHT_3);
-            walkingLeft_3 = atlas.findRegion(Constants.WALK_LEFT_3);
-
-            Array<TextureAtlas.AtlasRegion> walkRightFrames = new Array<TextureAtlas.AtlasRegion>();
-            walkRightFrames.add(walkingRight_1);
-            walkRightFrames.add(walkingRight_2);
-            walkRightFrames.add(walkingRight_3);
-
-            walkRightAnimation = new Animation(
+            walkRightAnimation = new Animation<AtlasRegion>(
                     Constants.WALK_LOOP_DURATION,
                     walkRightFrames,
-                    Animation.PlayMode.LOOP);
+                    PlayMode.LOOP_PINGPONG);
 
-            Array<TextureAtlas.AtlasRegion> walkLeftFrames = new Array<TextureAtlas.AtlasRegion>();
-            walkLeftFrames.add(walkingLeft_1);
-            walkLeftFrames.add(walkingLeft_2);
-            walkLeftFrames.add(walkingLeft_3);
+            Array<AtlasRegion> walkLeftFrames = new Array<AtlasRegion>();
+            walkLeftFrames.add(atlas.findRegion(Constants.WALK_LEFT_1));
+            walkLeftFrames.add(atlas.findRegion(Constants.WALK_LEFT_2));
+            walkLeftFrames.add(atlas.findRegion(Constants.WALK_LEFT_3));
 
-            walkLeftAnimation = new Animation(
+            walkLeftAnimation = new Animation<AtlasRegion>(
                     Constants.WALK_LOOP_DURATION,
                     walkLeftFrames,
-                    Animation.PlayMode.LOOP);
+                    PlayMode.LOOP_PINGPONG);
 
 
 
