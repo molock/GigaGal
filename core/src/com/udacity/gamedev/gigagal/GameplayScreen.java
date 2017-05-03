@@ -22,7 +22,6 @@ public class GameplayScreen implements Screen {
     public static final String TAG = GameplayScreen.class.getName();
 
     SpriteBatch batch;
-    ShapeRenderer renderer;
     ExtendViewport viewport;
     Level level;
 
@@ -35,8 +34,6 @@ public class GameplayScreen implements Screen {
         level = new Level();
 
         batch = new SpriteBatch();
-        renderer = new ShapeRenderer();
-        renderer.setAutoShapeType(true);
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
     }
 
@@ -61,9 +58,8 @@ public class GameplayScreen implements Screen {
 
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
-        renderer.setProjectionMatrix(viewport.getCamera().combined);
         // Render the Level
-        level.render(batch, renderer);
+        level.render(batch);
 
         // 在标题中显示fps
         Gdx.graphics.setTitle(""+Gdx.graphics.getFramesPerSecond());

@@ -1,7 +1,13 @@
 package com.udacity.gamedev.gigagal.entities;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.udacity.gamedev.gigagal.util.Assets;
+
+import static com.udacity.gamedev.gigagal.util.Constants.GIGAGAL_EYE_POSITION;
 
 /**
  * Created by wayne on 2017/5/1.
@@ -19,9 +25,6 @@ public class Platform {
     float height;
 
 
-
-
-
     public Platform(float left, float top, float width, float height) {
         // Populate the member variables
        this.top = top;
@@ -32,10 +35,9 @@ public class Platform {
        this.height = height;
     }
 
-    public void render(ShapeRenderer renderer) {
+    public void render(SpriteBatch batch) {
+        // TODO: Draw the platform using the NinePatch
+        Assets.instance.platformAssets.platformNinePatch.draw(batch, left, top, width, height);
 
-        // Draw a box representing the platform
-        renderer.setColor(Color.ORANGE);
-        renderer.rect(left, bottom, width, height);
     }
 }

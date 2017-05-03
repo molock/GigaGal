@@ -6,8 +6,10 @@ import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -21,6 +23,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public static final Assets instance = new Assets();
     public GigaGalAssets gigaGalAssets;
+    public PlatformAssets platformAssets;
     private AssetManager assetManager;
     private Assets() {
     }
@@ -33,6 +36,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
         TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS);
         gigaGalAssets = new GigaGalAssets(atlas);
+        platformAssets = new PlatformAssets(atlas);
     }
 
     @Override
@@ -82,8 +86,25 @@ public class Assets implements Disposable, AssetErrorListener {
                     Constants.WALK_LOOP_DURATION,
                     walkLeftFrames,
                     PlayMode.LOOP_PINGPONG);
+        }
 
 
+    }
+
+    public class PlatformAssets {
+
+        // Add a NinePatch member
+        public final NinePatch platformNinePatch;
+        public final TextureRegion platformTexture;
+
+        public PlatformAssets(TextureAtlas atlas) {
+            int edge = Constants.PLATFORM_EDGE_SIZE;
+
+            // Find the AtlasRegion holding the platform
+            platformTexture = atlas.findRegion(Constants.PLATFORM);
+
+            // Turn that AtlasRegion into a NinePatch using the edge constant you defined
+            platformNinePatch = new NinePatch(platformTexture, edge, edge, edge, edge);
 
         }
     }

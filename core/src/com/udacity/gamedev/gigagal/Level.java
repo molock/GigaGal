@@ -19,7 +19,7 @@ public class Level {
         // Initialize GigaGal
         gigaGal = new GigaGal();
         platforms = new Array<Platform>();
-        platforms.add(new Platform(100,20,10,10));
+        platforms.add(new Platform(50,20,100,30));
 
     }
 
@@ -28,18 +28,15 @@ public class Level {
         gigaGal.update(delta);
     }
 
-    public void render(SpriteBatch batch, ShapeRenderer renderer) {
-
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-        // Render all platforms in the platform array
-        for (Platform platform : platforms) {
-            platform.render(renderer);
-        }
-        renderer.end();
-
-        // Render GigaGal
+    public void render(SpriteBatch batch) {
         batch.begin();
+
+        for (Platform platform : platforms) {
+            platform.render(batch);
+        }
+
         gigaGal.render(batch);
+
         batch.end();
 
     }

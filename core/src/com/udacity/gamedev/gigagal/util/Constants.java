@@ -37,21 +37,22 @@ public class Constants {
     public static final String WALK_RIGHT_3 = "walk-3-right";
     public static final String WALK_LEFT_3 = "walk-3-left";
 
-    public static final float WALK_LOOP_DURATION = 0.25f;
+    // TODO: Add String constant for the name of the platform sprite
+    public static final String PLATFORM = "platform";
+
+    // TODO: Add a constant holding the size of the stretchable edges in the platform 9 patch
+    // (8 pixels)
+    public static final int PLATFORM_EDGE_SIZE = 8;
 
     // Define a Vector2 Constant for GigaGal's eye position within her sprites (16, 24)
     public static final Vector2 GIGAGAL_EYE_POSITION = new Vector2(16, 24);
-
     public static final float GIGAGAL_EYE_HEIGHT = 16f;
+
     public static final float GIGAGAL_MOVE_SPEED = 40;
+    public static final float WALK_LOOP_DURATION = 0.25f;
+
     public static final float GIGAGAL_JUMP_SPEED = 250;
-
-    // Add constant for GigaGal's max jump duration
-    // Meaning how long you can hold the jump key to continue to jump higher. 0.15 seconds works well
     public static final float GIGAGAL_MAX_JUMP_DURATION = 0.15f;
-
-    // Add constant for acceleration due to gravity
-    // Something like 1000 works well.
     public static final float GRAVITY_ACC = 1000;
 
 }
